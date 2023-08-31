@@ -1,0 +1,82 @@
+{
+  "name": "coc-biome",
+  "version": "1.0.0",
+  "description": "Biome extension for coc.nvim",
+  "author": "Heyward Fann <fannheyward@gmail.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "coc.nvim"
+  ],
+  "engines": {
+    "coc": "^0.0.82"
+  },
+  "scripts": {
+    "fmt": "biome format --write ./src",
+    "check": "biome check ./src",
+    "build": "node esbuild.js",
+    "prepare": "node esbuild.js"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.0.0",
+    "@types/node": "18",
+    "coc.nvim": "^0.0.83-next.9",
+    "esbuild": "^0.19.2",
+    "typescript": "^5.2.2"
+  },
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
+  "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": "biome.json",
+        "url": "https://raw.githubusercontent.com/biomejs/biome/main/editors/vscode/configuration_schema.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "coc-biome configuration",
+      "properties": {
+        "biome.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable coc-biome extension"
+        },
+        "biome.bin": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "Custom biome binary path"
+        },
+        "biome.requireConfiguration": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Require a Biome configuration file to enable syntax errors, formatting and linting."
+        },
+        "biome.trace.server": {
+          "type": "string",
+          "default": "off",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "enumDescriptions": [
+            "No traces",
+            "Error only",
+            "Full log"
+          ],
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    },
+    "commands": []
+  },
+  "dependencies": {}
+}
