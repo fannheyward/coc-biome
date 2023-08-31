@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14]
+        node-version: [18]
 
     env:
       NODE_ENV: test
@@ -37,4 +37,4 @@ jobs:
           yarn run fmt
       - name: biome check
         run: |
-          yarn run check
+          yarn run lint

@@ -1,16 +1,16 @@
 import { spawn } from "child_process";
+import { existsSync } from "fs";
+import { type Socket, connect } from "net";
+import { join } from "path";
 import {
 	ExtensionContext,
 	LanguageClient,
 	LanguageClientOptions,
 	ServerOptions,
-	services,
 	StreamInfo,
+	services,
 	workspace,
 } from "coc.nvim";
-import { existsSync } from "fs";
-import { connect, type Socket } from "net";
-import { join } from "path";
 
 type Architecture = "x64" | "arm64";
 

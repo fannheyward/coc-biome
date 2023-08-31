@@ -13,13 +13,13 @@
   },
   "scripts": {
     "fmt": "biome format --write ./src",
-    "check": "biome check ./src",
+    "lint": "biome check ./src",
     "build": "node esbuild.js",
     "prepare": "node esbuild.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.0.0",
-    "@types/node": "18",
+    "@types/node": "14",
     "coc.nvim": "^0.0.83-next.9",
     "esbuild": "^0.19.2",
     "typescript": "^5.2.2"
