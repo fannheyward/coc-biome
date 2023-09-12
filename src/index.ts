@@ -130,6 +130,16 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		return;
 	}
 
+	const requireConfiguration = workspace
+		.getConfiguration("biome")
+		.get("requireConfiguration", true);
+	if (requireConfiguration) {
+		const files = await workspace.findFiles("**/biome.json");
+		if (files.length === 0) {
+			return;
+		}
+	}
+
 	const command = resolveBiomeBin();
 	if (!command) {
 		return;
