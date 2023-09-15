@@ -12,50 +12,6 @@ import {
 	workspace,
 } from "coc.nvim";
 
-type Architecture = "x64" | "arm64";
-
-type PlatformTriplets = {
-	[P in NodeJS.Platform]?: {
-		[A in Architecture]: {
-			triplet: string;
-			package: string;
-		};
-	};
-};
-
-const PLATFORMS: PlatformTriplets = {
-	win32: {
-		x64: {
-			triplet: "x86_64-pc-windows-msvc",
-			package: "@biomejs/cli-win32-x64",
-		},
-		arm64: {
-			triplet: "aarch64-pc-windows-msvc",
-			package: "@biomejs/cli-win32-arm64",
-		},
-	},
-	darwin: {
-		x64: {
-			triplet: "x86_64-apple-darwin",
-			package: "@biomejs/cli-darwin-x64",
-		},
-		arm64: {
-			triplet: "aarch64-apple-darwin",
-			package: "@biomejs/cli-darwin-arm64",
-		},
-	},
-	linux: {
-		x64: {
-			triplet: "x86_64-unknown-linux-gnu",
-			package: "@biomejs/cli-linux-x64",
-		},
-		arm64: {
-			triplet: "aarch64-unknown-linux-gnu",
-			package: "@biomejs/cli-linux-arm64",
-		},
-	},
-};
-
 function resolveBiomeBin(): string {
 	// 1. biome.bin in coc-settings
 	// 2. local node_modules
@@ -65,30 +21,15 @@ function resolveBiomeBin(): string {
 		return bin;
 	}
 
-	bin = join(
-		workspace.root,
-		"node_modules",
-		"@biomejs",
-		"biome",
-		"bin",
-		"biome",
-	);
-	if (existsSync(bin)) {
-		const packageName = PLATFORMS[process.platform]?.[process.arch]?.package;
-		return join(
-			workspace.root,
-			"node_modules",
-			packageName,
-			process.platform === "win32" ? "biome.exe" : "biome",
-		);
-	}
-	return "";
+	bin = join(workspace.root, "node_modules", ".bin", "biome");
+	return existsSync(bin) ? bin : "";
 }
 
 async function getSocketPath(command: string): Promise<string> {
 	const tmpdir = (await workspace.nvim.eval("$TMPDIR")) as string;
 	const child = spawn(command, ["__print_socket"], {
 		stdio: "pipe",
+		shell: true,
 		env: { ...process.env, TMPDIR: tmpdir },
 	});
 	return new Promise((resolve, reject) => {
