@@ -9,6 +9,7 @@ import {
 	ServerOptions,
 	StreamInfo,
 	services,
+	window,
 	workspace,
 } from "coc.nvim";
 
@@ -71,18 +72,21 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		return;
 	}
 
+	const outputChannel = window.createOutputChannel("Biome");
 	const requireConfiguration = workspace
 		.getConfiguration("biome")
 		.get("requireConfiguration", true);
 	if (requireConfiguration) {
 		const files = await workspace.findFiles("**/biome.json");
 		if (files.length === 0) {
+			outputChannel.appendLine("No biome.json file found");
 			return;
 		}
 	}
 
 	const command = resolveBiomeBin();
 	if (!command) {
+		outputChannel.appendLine("No biome binary file found");
 		return;
 	}
 
@@ -91,8 +95,11 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		command,
 	);
 	const clientOptions: LanguageClientOptions = {
+		outputChannel,
 		progressOnInitialization: true,
 		documentSelector: [
+			{ scheme: "file", language: "json" },
+			{ scheme: "file", language: "jsonc" },
 			{ scheme: "file", language: "javascript" },
 			{ scheme: "file", language: "javascriptreact" },
 			{ scheme: "file", language: "typescript" },
