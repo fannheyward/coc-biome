@@ -9,7 +9,8 @@
 ## Configurations
 
 - `biome.enable`: enable coc-biome, default `true`
-- `biome.bin`: custom Biome binary path. By default, coc-biome only uses local `biome` binary in your project.
+- `biome.bin`: custom Biome binary path. By default, coc-biome only uses local `biome` binary in your project
+- `biome.requireConfiguration`: Require a `biome.json` file to enable Biome's formatting and linting, default `true`
 
 ## License
 
