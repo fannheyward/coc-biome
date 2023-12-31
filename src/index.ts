@@ -1,6 +1,7 @@
 import { spawn } from "child_process";
 import { existsSync } from "fs";
 import { type Socket, connect } from "net";
+import os from "os";
 import { join } from "path";
 import {
 	ExtensionContext,
@@ -27,7 +28,8 @@ function resolveBiomeBin(): string {
 }
 
 async function getSocketPath(command: string): Promise<string> {
-	const tmpdir = (await workspace.nvim.eval("$TMPDIR")) as string;
+	const tmpdir =
+		(await workspace.nvim.eval("$TMPDIR")) || (os.tmpdir() as string);
 	const child = spawn(command, ["__print_socket"], {
 		stdio: "pipe",
 		shell: true,
