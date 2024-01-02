@@ -28,8 +28,8 @@ function resolveBiomeBin(): string {
 }
 
 async function getSocketPath(command: string): Promise<string> {
-	const tmpdir =
-		(await workspace.nvim.eval("$TMPDIR")) || (os.tmpdir() as string);
+	const nvim = workspace.nvim;
+	const tmpdir = ((await nvim.eval("$TMPDIR")) || os.tmpdir()) as string;
 	const child = spawn(command, ["__print_socket"], {
 		stdio: "pipe",
 		shell: true,
