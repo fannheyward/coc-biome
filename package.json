@@ -33,8 +33,12 @@
   "contributes": {
     "jsonValidation": [
       {
+        "fileMatch": "biome.jsonc",
+        "url": "https://raw.githubusercontent.com/biomejs/biome/main/packages/%40biomejs/biome/configuration_schema.json"
+      },
+      {
         "fileMatch": "biome.json",
-        "url": "https://raw.githubusercontent.com/biomejs/biome/main/editors/vscode/configuration_schema.json"
+        "url": "https://raw.githubusercontent.com/biomejs/biome/main/packages/%40biomejs/biome/configuration_schema.json"
       }
     ],
     "configuration": {
