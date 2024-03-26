@@ -100,8 +100,9 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		outputChannel,
 		progressOnInitialization: true,
 		documentSelector: [
-			{ scheme: "file", language: "json" },
-			{ scheme: "file", language: "jsonc" },
+			{ scheme: "file", language: "vue" },
+			{ scheme: "file", language: "astro" },
+			{ scheme: "file", language: "svelte" },
 			{ scheme: "file", language: "javascript" },
 			{ scheme: "file", language: "javascriptreact" },
 			{ scheme: "file", language: "typescript" },
