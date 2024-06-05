@@ -25,6 +25,7 @@
     "typescript": "^5.3.3"
   },
   "activationEvents": [
+    "onLanguage:css",
     "onLanguage:vue",
     "onLanguage:astro",
     "onLanguage:svelte",

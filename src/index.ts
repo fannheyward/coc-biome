@@ -100,6 +100,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		outputChannel,
 		progressOnInitialization: true,
 		documentSelector: [
+			{ scheme: "file", language: "css" },
 			{ scheme: "file", language: "vue" },
 			{ scheme: "file", language: "astro" },
 			{ scheme: "file", language: "svelte" },
