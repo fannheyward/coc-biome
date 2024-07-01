@@ -21,7 +21,7 @@
     "@biomejs/biome": "^1.8.0",
     "@types/node": "16",
     "coc.nvim": "^0.0.83-next.18",
-    "esbuild": "^0.21.4",
+    "esbuild": "^0.22.0",
     "typescript": "^5.3.3"
   },
   "activationEvents": [
