@@ -27,6 +27,8 @@
   "activationEvents": [
     "onLanguage:css",
     "onLanguage:vue",
+    "onLanguage:json",
+    "onLanguage:jsonc",
     "onLanguage:astro",
     "onLanguage:svelte",
     "onLanguage:javascript",

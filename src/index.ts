@@ -79,7 +79,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		.getConfiguration("biome")
 		.get("requireConfiguration", true);
 	if (requireConfiguration) {
-		const files = await workspace.findFiles("**/biome.json");
+		const files = await workspace.findFiles("**/biome.{json,jsonc}");
 		if (files.length === 0) {
 			outputChannel.appendLine("No biome.json file found");
 			return;
@@ -102,6 +102,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
 		documentSelector: [
 			{ scheme: "file", language: "css" },
 			{ scheme: "file", language: "vue" },
+			{ scheme: "file", language: "json" },
+			{ scheme: "file", language: "jsonc" },
 			{ scheme: "file", language: "astro" },
 			{ scheme: "file", language: "svelte" },
 			{ scheme: "file", language: "javascript" },
