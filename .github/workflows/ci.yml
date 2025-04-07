@@ -15,26 +15,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18]
+        node-version: [20]
 
     env:
       NODE_ENV: test
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install yarn
+      - name: npm ci
         run: |
-          curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
-      - name: yarn install
-        run: |
-          yarn
+          npm ci
       - name: biome format
         run: |
-          yarn run fmt
+          npm run fmt
       - name: biome check
         run: |
-          yarn run lint
+          npm run lint
