@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import { type Socket, connect } from "node:net";
+import { connect, type Socket } from "node:net";
 import os from "node:os";
 import { join } from "node:path";
 import {
@@ -56,7 +56,7 @@ async function createMessageTransports(command: string): Promise<StreamInfo> {
 	let socket: Socket;
 	try {
 		socket = connect(socketPath);
-	} catch (err) {
+	} catch (_err) {
 		throw new Error(`Could not connect to the Biome server at: ${socketPath}`);
 	}
 
